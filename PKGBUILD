@@ -2,7 +2,7 @@
 # Contributor: Hugo Doria <hugo@archlinux.org>
 
 pkgname=namcap
-pkgver=3.0
+pkgver=3.0.1
 pkgrel=1
 pkgdesc="A Pacman package analyzer"
 arch=('any')
@@ -11,7 +11,7 @@ license=('GPL')
 depends=('python' 'licenses')
 makedepends=('python-distribute')
 source=(ftp://ftp.archlinux.org/other/$pkgname/${pkgname}-${pkgver}.tar.gz)
-md5sums=('99078cb24a12bd96fc4f3b1b3362a953')
+md5sums=('824f845305495bbffbdb8af9760f1aad')
 
 package() {
   cd ${srcdir}/${pkgname}-${pkgver}
