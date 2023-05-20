@@ -1,36 +1,44 @@
-# Maintainer : Rémy Oudompheng <remy@archlinux.org>
+# Maintainer: Rémy Oudompheng <remy@archlinux.org>
+# Maintainer: Caleb Maclennan <caleb@alerque.com>
 # Contributor: Hugo Doria <hugo@archlinux.org>
 
 pkgname=namcap
-pkgver=3.4.0
-pkgrel=3
+pkgver=3.4.1
+pkgrel=1
 pkgdesc="A Pacman package analyzer"
-arch=('any')
+arch=(any)
 url='https://gitlab.archlinux.org/pacman/namcap'
-license=('GPL')
-depends=('python' 'pyalpm' 'licenses' 'binutils' 'elfutils' 'python-pyelftools' 'pkgconf')
-checkdepends=('systemd' 'python-pytest' 'python-six')
-makedepends=('python-build' 'python-installer' 'python-setuptools' 'python-wheel')
-source=(https://gitlab.archlinux.org/pacman/namcap/-/archive/${pkgver}/namcap-${pkgver}.tar.bz2)
-sha512sums=('ab4d1658dbdf192d1d91e3cf3cd3e4cab0be6021561e6d14ad86603b95f6261eb97bd3087a003ce493b3dea7a240d8fdddc29f059613b3ff3fb718467cd8078e')
-
-prepare() {
-  cd ${pkgname}-${pkgver}
-}
+license=(GPL)
+depends=(binutils
+         elfutils
+         licenses
+         pkgconf
+         pyalpm
+         python
+         python-pyelftools)
+checkdepends=(python-pytest
+              python-six
+              systemd)
+makedepends=(python-{build,installer,wheel}
+            python-setuptools)
+_archive="$pkgname-$pkgver"
+source=("$url/-/archive/$pkgver/$_archive.tar.bz2")
+sha512sums=('f83c799475c29ef031ad4274d66df4f30e425de2423df315591a38bec7b770fb68ae675b1622020029344e66b2169a7518b5783db725bdc88dc14ee3f5ead446')
 
 build() {
-  cd ${pkgname}-${pkgver}
-  python setup.py build
+  cd "$_archive"
+  python -m build -wn
 }
 
 check() {
-  cd ${pkgname}-${pkgver}
-  env PARSE_PKGBUILD_PATH="${srcdir}/${pkgname}-${pkgver}" \
-      PATH="${srcdir}/${pkgname}-${pkgver}/scripts:$PATH" \
-      pytest
+  cd "$_archive"
+  env PARSE_PKGBUILD_PATH="$PWD" PATH="$PWD/scripts:$PATH" pytest
 }
 
 package() {
-  cd ${pkgname}-${pkgver}
-  python setup.py install --root="${pkgdir}"
+  cd "$_archive"
+  python -m installer -d "$pkgdir" dist/*.whl
+  local site_packages="$(python -c "import site; print(site.getsitepackages()[0])")"
+  mv "$pkgdir/"{"$site_packages/usr/share",usr}
+  rmdir "$pkgdir/$site_packages/usr"
 }
