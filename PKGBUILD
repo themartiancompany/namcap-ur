@@ -3,11 +3,11 @@
 # Contributor: Hugo Doria <hugo@archlinux.org>
 
 pkgname=namcap
-pkgver=3.4.1
+pkgver=3.4.2
 pkgrel=1
-pkgdesc="A Pacman package analyzer"
+pkgdesc='A Pacman package analyzer'
 arch=(any)
-url='https://gitlab.archlinux.org/pacman/namcap'
+url="https://gitlab.archlinux.org/pacman/$pkgname"
 license=(GPL)
 depends=(binutils
          elfutils
@@ -22,8 +22,11 @@ checkdepends=(python-pytest
 makedepends=(python-{build,installer,wheel}
             python-setuptools)
 _archive="$pkgname-$pkgver"
-source=("$url/-/archive/$pkgver/$_archive.tar.bz2")
-sha512sums=('f83c799475c29ef031ad4274d66df4f30e425de2423df315591a38bec7b770fb68ae675b1622020029344e66b2169a7518b5783db725bdc88dc14ee3f5ead446')
+source=("$url/-/releases/$pkgver/downloads/$_archive.tar.bz2"{,.asc})
+sha256sums=('2da8f2dc267dc9be053e4c5719a4eda24eb0227ae5f0387089b392cf01bd1d80'
+            'SKIP')
+validpgpkeys=(9F377DDB6D3153A48EB3EB1E63CC496475267693  # caleb@alerque.com
+              CCB34EBBB9541EF3F7B366C1D4A753468A5A5B67) # alerque@archlinux.org
 
 build() {
   cd "$_archive"
