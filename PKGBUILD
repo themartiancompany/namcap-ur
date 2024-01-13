@@ -8,7 +8,7 @@ pkgrel=1
 pkgdesc='A Pacman package analyzer'
 arch=(any)
 url="https://gitlab.archlinux.org/pacman/$pkgname"
-license=(GPL)
+license=(GPL-2.0-or-later)
 depends=(binutils
          elfutils
          licenses
