@@ -3,7 +3,7 @@
 # Contributor: Hugo Doria <hugo@archlinux.org>
 
 pkgname=namcap
-pkgver=3.4.2
+pkgver=3.5.0
 pkgrel=1
 pkgdesc='A Pacman package analyzer'
 arch=(any)
@@ -15,6 +15,7 @@ depends=(binutils
          pkgconf
          pyalpm
          python
+         python-license-expression
          python-pyelftools)
 checkdepends=(python-pytest
               python-six
@@ -23,7 +24,7 @@ makedepends=(python-{build,installer,wheel}
             python-setuptools)
 _archive="$pkgname-$pkgver"
 source=("$url/-/releases/$pkgver/downloads/$_archive.tar.bz2"{,.asc})
-sha256sums=('2da8f2dc267dc9be053e4c5719a4eda24eb0227ae5f0387089b392cf01bd1d80'
+sha256sums=('4ce09b1fea317b553f565326cac1ac532f2e3c2f857bbce668d2a68325c5ef98'
             'SKIP')
 validpgpkeys=(9F377DDB6D3153A48EB3EB1E63CC496475267693  # caleb@alerque.com
               CCB34EBBB9541EF3F7B366C1D4A753468A5A5B67) # alerque@archlinux.org
