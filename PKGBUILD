@@ -1,3 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0
+#
+# Maintainer:  Pellegrino Prevete <cGVsbGVncmlub3ByZXZldGVAZ21haWwuY29tCg== | base -d>
+# Maintainer:  Truocolo <truocolo@aol.com>
 # Maintainer: Rémy Oudompheng <remy@archlinux.org>
 # Maintainer: Caleb Maclennan <caleb@alerque.com>
 # Contributor: Hugo Doria <hugo@archlinux.org>
@@ -46,3 +50,5 @@ package() {
   mv "$pkgdir/"{"$site_packages/usr/share",usr}
   rmdir "$pkgdir/$site_packages/usr"
 }
+
+# vim:set sw=2 sts=-1 et:
